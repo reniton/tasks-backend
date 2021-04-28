@@ -51,6 +51,14 @@ pipeline {
                 }
             }
         }
+        stage('Testes Funcionais') {
+            steps{
+                dir('teste-api'){
+                    git credentialsId: 'github', url: 'https://github.com/reniton/TaskFuncional.git'
+                    bat 'mvn test'
+                }
+            }
+        }
     }
 }
 
