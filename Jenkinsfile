@@ -53,7 +53,7 @@ pipeline {
         }
         stage('Testes Funcionais') {
             steps{
-                dir('teste-api'){
+                dir('teste-funcionais'){
                     git credentialsId: 'github', url: 'https://github.com/reniton/TaskFuncional.git'
                     bat 'mvn -Dbrowser=chrome test'
                 }
