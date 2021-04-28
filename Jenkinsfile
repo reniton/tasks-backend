@@ -34,6 +34,14 @@ pipeline {
                 deploy adapters: [tomcat8(credentialsId: 'TomcatLogin', path: '', url: 'http://localhost:8001/')], contextPah: 'tasks-backend', war: 'target/tasks-backend.war'
             }
         }
+        stage('Testes de API') {
+            steps{
+                dir('teste-api'){
+                    git credentialsId: 'github', url: 'https://github.com/reniton/TaskService.git'
+                    bat 'mvn test'
+                }
+            }
+        }
     }
 }
 
