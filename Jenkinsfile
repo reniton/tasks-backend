@@ -18,9 +18,18 @@ pipeline {
             steps {
                 withSonarQubeEnv('SONAR_LOCAL') {
                     bat "${scannerHome}/bin/sonar-scanner -e -Dsonar.projectKey=DeployBack -Dsonar.host.url=http://localhost:9000 -Dsonar.login=9caed507afeecb76d43e5d0d5c7e555e36e653c7 -Dsonar.java.binaries=target -Dsonar.coverage.exclusions=**/.mvn/**,**/src/test/**,**/model/**,**Application.java "
-                   }
                 }
             }
+        }
+        stage('Sonar Analysis'){
+            steps{
+                sleep(30)
+                timeout(time:1, unit: 'MINUTES') {
+                    waitForQualityGate abortPipeline: true
+                }
+            }
+        }
+
     }
 }
 
