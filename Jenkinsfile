@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Build Projeto API'){
             steps {
-                bat 'echo deu certo'
+                bat 'mvn clean package -DskipTests=true'
             }
         }
     }
